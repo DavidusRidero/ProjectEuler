@@ -1,17 +1,23 @@
 #include<bits/stdc++.h>
 typedef unsigned long long ull;
 
-bool is_palindrome(ull n) {
-    int length = std::to_string(n).length();
-    std::string_view s1,s2;
-    if (length&1) {
-        // Odd
-        s1 = std::to_string_v(n).
-    }
-    std::cout << length;
+bool is_palindrome(const ull n) {
+    const std::string s1 = std::to_string(n);
+    std::string s2 = s1;
+    std::reverse(s2.begin(),s2.end());
+
+    return s1==s2;
 }
 
 int main() {
-    ull number = 999999;
-    is_palindrome(number);
+    ull largest = 0;
+
+    int i=999,j=999;
+    for (i=999; i>99; i--)
+        for (j=999; j>99; j--)
+            if (is_palindrome(i*j))
+                largest = std::max(largest, ull(i*j));
+
+    std::cout << "Largest Palindrome: " << largest;
+    return 9;
 }
