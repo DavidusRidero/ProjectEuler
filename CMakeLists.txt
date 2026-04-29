@@ -7,4 +7,5 @@ add_executable(ProjectEuler
         P2.cpp
         P3.cpp
         P4.cpp
+        P5.cpp
 )
