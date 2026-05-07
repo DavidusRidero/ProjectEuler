@@ -4,6 +4,8 @@ project(ProjectEuler)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(ProjectEuler
+        P0.cpp
+        P1.cpp
         P2.cpp
         P3.cpp
         P4.cpp
@@ -11,4 +13,6 @@ add_executable(ProjectEuler
         P6.cpp
         P7.cpp
         P8.cpp
+        P9.cpp
+        P10.cpp
 )
