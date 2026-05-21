@@ -15,4 +15,6 @@ add_executable(ProjectEuler
         P8.cpp
         P9.cpp
         P10.cpp
+        Helpers/primes.h
+        Helpers/primes.cpp
 )
