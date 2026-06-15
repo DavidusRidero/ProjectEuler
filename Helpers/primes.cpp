@@ -1,34 +1,34 @@
 #include "primes.h"
 #include <bits/stdc++.h>
 
-// Hardcode your file location here as a constant expression.
-// If you run your compiler from the root project directory, "Helper/primes_cache.txt" works perfectly.
 constexpr const char* CACHE_FILE_PATH = "Helper/primes_cache.txt";
 
-std::vector<int> load_cached_primes() {
-    std::vector<int> primes;
+namespace {
+    std::vector<int> load_cached_primes() {
+        std::vector<int> primes;
 
-    // TODO:
-    // 1. Open CACHE_FILE_PATH using std::ifstream
-    // 2. Check if the file opened successfully
-    // 3. Read integers sequentially and push_back into primes
+        // TODO:
+        // 1. Open CACHE_FILE_PATH using std::ifstream
+        // 2. Check if the file opened successfully
+        // 3. Read integers sequentially and push_back into primes
 
-    return primes;
-}
+        return primes;
+    }
 
-void save_primes_to_cache(const std::vector<int>& primes) {
-    // TODO:
-    // 1. Open CACHE_FILE_PATH using std::ofstream
-    // 2. Loop through the vector and write each prime to the file
-}
+    void save_primes_to_cache(const std::vector<int>& primes) {
+        // TODO:
+        // 1. Open CACHE_FILE_PATH using std::ofstream
+        // 2. Loop through the vector and write each prime to the file
+    }
 
-std::vector<int> generate_primes_up_to(int limit) {
-    std::vector<int> primes;
+    std::vector<int> generate_primes_up_to(int limit) {
+        std::vector<int> primes;
 
-    // TODO:
-    // Implement your choice of prime generation (e.g., Sieve of Eratosthenes or Trial Division)
+        // TODO:
+        // Implement your choice of prime generation (e.g., Sieve of Eratosthenes or Trial Division)
 
-    return primes;
+        return primes;
+    }
 }
 
 std::vector<int> get_primes(int limit) {
