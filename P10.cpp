@@ -1,32 +1,32 @@
 #include <bits/stdc++.h>
-//What is the 10,001st prime number?
 
-std::vector<unsigned int> Primes;
+//Find the sum of all the primes below two million.
 
-void check(unsigned int n) {
-    for (auto prime: Primes)
-        if (n%prime == 0)
-            return;
+using ull = unsigned long long;
 
-    Primes.push_back(n);
+ull solution (int limit) {
+    ull primes {};
+    if (limit < 2) return primes;
+
+    std::vector<bool> is_prime (limit+1, true);
+    is_prime[0] = is_prime[1] = false;
+
+    for ( size_t i {2}; i*i <= limit; i++)
+        for ( size_t j { i*i }; j <= limit; j += i)
+            is_prime[j] = false;
+
+    for ( ull i = 2; i <= limit; i++)
+        if (is_prime[i])
+            primes += i;
+
+    return primes;
 }
 
-void print_primes() {
-    for (auto prime:Primes)
-        std::cout << prime << " ";
-    std::cout << "\n";
-}
+int main () {
+    int limit = 2'000'000;
+    // int limit= 10;
 
-int main() {
-    unsigned int limit = 2000000;
+    std::cout << "Sum of Primes below " << limit << " is " << solution(limit) << ".\n";
 
-    Primes.push_back(2);
-    unsigned int counter = 3;
-
-    while (Primes.back() <= limit)
-        check(counter++);
-
-    std::cout << "Biggest Prime less than " << limit << ": " << Primes.back() << std::endl;
-
-    return 1;
+    return 0;
 }

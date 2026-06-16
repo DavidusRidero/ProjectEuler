@@ -1,3 +1,7 @@
+module;
+
+
+
 #include "primes.h"
 #include <bits/stdc++.h>
 
