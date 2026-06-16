@@ -22,5 +22,6 @@ add_executable(ProjectEuler
         Helpers/primes.h
         Helpers/primes.cpp
         P11.cpp
+        P12.cpp
         #        Helpers/primes.cppm
 )
