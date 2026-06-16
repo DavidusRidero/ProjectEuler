@@ -19,10 +19,10 @@ add_executable(ProjectEuler
         P8.cpp
         P9.cpp
         P10.cpp
-        Helpers/primes.h
-        Helpers/primes.cpp
         P11.cpp
         P12.cpp
         P13.cpp
-        #        Helpers/primes.cppm
+        P14.cpp
+        P15.cpp
+        Helpers/integers.cppm
 )
