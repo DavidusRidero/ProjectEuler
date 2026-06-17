@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+//What is the sum of the digits of the number 2^{1000}?
+
+class pint {
+    using uint = uint32_t;
+
+public:
+
+
+    [[nodiscard]] uint load(const size_t vec_idx, const size_t bit_idx) const {
+        const size_t shift = 32 - (bit_idx + 1) * 4;
+        return (integer[vec_idx] >> shift) & 0b1111U;
+    }
+
+    [[nodiscard]] uint load(const uint element, const size_t bit_idx) const {
+        const size_t shift = 32 - (bit_idx + 1) * 4;
+        return (element >> shift) & 0b1111U;
+    }
+
+    void store(const size_t vec_idx, size_t bit_idx, uint value) {
+        const size_t shift = 32 - (bit_idx + 1) * 4;
+
+        const uint clear_mask = ~(0b1111U << shift);
+
+        integer[vec_idx] &= clear_mask;
+        integer[vec_idx] |= (value & 0b1111U)  << shift;
+    }
+
+    void store(uint& element, size_t bit_idx, uint value) {
+        const size_t shift = 32 - (bit_idx + 1) * 4;
+
+        const uint clear_mask = ~(0b1111U << shift);
+
+        element &= clear_mask;
+        element |= (value & 0b1111U)  << shift;
+    }
+
+    void mul2() {
+        uint carry {};
+        for (size_t vec_idx {}; vec_idx < integer.size(); vec_idx++)
+            for ( size_t bit_idx {}; bit_idx < 8; bit_idx++) {
+                uint result = carry;
+                result += 2*load(vec_idx,bit_idx);
+
+                store(vec_idx,bit_idx,result%10);
+                carry = result/10;
+            }
+
+        if (carry)
+            { integer.push_back(0); store(integer.size()-1,0, carry); }
+    }
+
+    std::string print() {
+        std::string value {};
+        for (auto rit = integer.rbegin(); rit != integer.rend(); ++rit)
+            for ( int bit_idx {7}; bit_idx >= 0; --bit_idx)
+                value += std::to_string(load(*rit,bit_idx));
+
+        value.erase(0,value.find_first_not_of('0'));
+        std::cout << value << "\n";
+        return value;
+    }
+
+    std::vector<uint> integer;
+};
+
+int main () {
+    pint number;
+    int value = 0b0001'0000'0000'0000'0000'0000'0000'0000;
+    number.integer.push_back(value);
+
+    unsigned power {0};
+    for (; power < 1000; power++)
+        number.mul2();
+    std::cout << "\n2^" << power << " = ";
+    std::string numeral = number.print();
+
+    auto sum {0};
+    for (char ch : numeral)
+        sum += (ch - '0');
+
+    std::cout << "\nThe sum of digits in 2^1000: " << sum << "\n";
+    return 0;
+}

@@ -8,21 +8,6 @@ set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "2182bfde-f8ed-47f2-aa78-d2afef7d665
 set(CMAKE_CXX_MODULE_STD ON)
 
 add_executable(ProjectEuler
-        P0.cpp
-        P1.cpp
-        P2.cpp
-        P3.cpp
-        P4.cpp
-        P5.cpp
-        P6.cpp
-        P7.cpp
-        P8.cpp
-        P9.cpp
-        P10.cpp
-        P11.cpp
-        P12.cpp
-        P13.cpp
-        P14.cpp
-        P15.cpp
         Helpers/integers.cppm
+        "Done and Dusted/P16.cpp"
 )

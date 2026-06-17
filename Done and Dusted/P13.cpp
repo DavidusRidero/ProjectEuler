@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "Helpers/integers.cppm"
+#include "../Helpers/integers.cppm"
 
 std::ifstream& operator>> (std::ifstream& fin, integer& number) {
     std::string raw_input;
