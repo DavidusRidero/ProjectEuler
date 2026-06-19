@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-//What is the sum of the digits of the number 2^{1000}?
-
-class pint {
     using uint = uint32_t;
 
 public:
@@ -61,22 +57,3 @@ public:
 
     std::vector<uint> integer;
 };
-
-int main () {
-    pint number;
-    int value = 0b0001'0000'0000'0000'0000'0000'0000'0000;
-    number.integer.push_back(value);
-
-    unsigned power {0};
-    for (; power < 1000; power++)
-        number.mul2();
-    std::cout << "\n2^" << power << " = ";
-    std::string numeral = number.print();
-
-    auto sum {0};
-    for (char ch : numeral)
-        sum += (ch - '0');
-
-    std::cout << "\nThe sum of digits in 2^1000: " << sum << "\n";
-    return 0;
-}
