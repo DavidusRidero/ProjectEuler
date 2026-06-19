@@ -1,60 +1,52 @@
 class pint {
-    using uint = uint32_t;
-
 public:
-    [[nodiscard]] uint load(const size_t vec_idx, const size_t bit_idx) const {
-        const size_t shift = 32 - (bit_idx + 1) * 4;
-        return (integer[vec_idx] >> shift) & 0b1111U;
+    using uint = uint8_t;
+
+    pint() = default;
+    explicit pint(const uint value) : numerals{value} { }
+
+    [[nodiscard]] uint load (const size_t idx) const {
+        //Full-Index function
+        const auto v_idx = idx >> 3;
+        const auto n_idx = idx & 0b111U;
+
+        return (numerals.at(v_idx) >> (28 - 4*n_idx)) & 0b1111U;
     }
 
-    [[nodiscard]] uint load(const uint element, const size_t bit_idx) const {
-        const size_t shift = 32 - (bit_idx + 1) * 4;
-        return (element >> shift) & 0b1111U;
+    [[nodiscard]] uint load (const uint& element, const size_t n_idx) const {
+        //Range-based loop function
+        return (element >> (28 - 4*n_idx)) & 0b1111U;
     }
 
-    void store(const size_t vec_idx, size_t bit_idx, uint value) {
-        const size_t shift = 32 - (bit_idx + 1) * 4;
+    void store (const size_t idx, const uint value) {
+        const auto v_idx = idx / 8;
+        const auto n_idx = idx & 0b111U;
 
-        const uint clear_mask = ~(0b1111U << shift);
-
-        integer[vec_idx] &= clear_mask;
-        integer[vec_idx] |= (value & 0b1111U)  << shift;
+        //Strings can't be used at all. Cause they might overflow.
+        auto result = numerals.at[v_idx]
     }
 
-    void store(uint& element, size_t bit_idx, uint value) {
-        const size_t shift = 32 - (bit_idx + 1) * 4;
+    void store (uint& element, const size_t n_idx, const uint value) {
+        //Range-based loop function
+        std::string ele_str = std::bitset<32>(element).to_string();
+        const std::string val_str = std::bitset<4>(value).to_string();
+        ele_str.replace(4*n_idx, 4, val_str);
 
-        const uint clear_mask = ~(0b1111U << shift);
-
-        element &= clear_mask;
-        element |= (value & 0b1111U)  << shift;
+        element = std::stoul(ele_str);
     }
 
-    void mul2() {
-        uint carry {};
-        for (size_t vec_idx {}; vec_idx < integer.size(); vec_idx++)
-            for ( size_t bit_idx {}; bit_idx < 8; bit_idx++) {
-                uint result = carry;
-                result += 2*load(vec_idx,bit_idx);
+    void print () const {
+        std::string number {};
+        for (const uint32_t& numeral: numerals)
+            for (size_t idx = 0; idx < 8; idx++)
+                number += std::to_string(load(numeral, idx));
 
-                store(vec_idx,bit_idx,result%10);
-                carry = result/10;
-            }
+        reverse(number.begin(), number.end());
+        number.erase(0, number.find_first_not_of('0'));
 
-        if (carry)
-            { integer.push_back(0); store(integer.size()-1,0, carry); }
+        std::cout << number << "\n";
     }
 
-    std::string print() {
-        std::string value {};
-        for (auto rit = integer.rbegin(); rit != integer.rend(); ++rit)
-            for ( int bit_idx {7}; bit_idx >= 0; --bit_idx)
-                value += std::to_string(load(*rit,bit_idx));
-
-        value.erase(0,value.find_first_not_of('0'));
-        std::cout << value << "\n";
-        return value;
-    }
-
-    std::vector<uint> integer;
+private:
+    std::vector<uint> numerals = {0b0001'0000'0000'0000'0000'0000'0000'0000U};
 };
