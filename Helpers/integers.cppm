@@ -1,9 +1,9 @@
-module;
+// module;
 
 #include <bits/stdc++.h>
-export module integers;
+// export module integers;
 
-export class integer {
+class integer {
 public:
     static constexpr int BASE = 1'000'000'000;
 
